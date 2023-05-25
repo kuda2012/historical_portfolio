@@ -1,5 +1,8 @@
 import CurrencyInput from "react-currency-input-field";
-const SelectCurrency = ({ initialAmount, setInitialAmount }) => {
+const SelectCurrency = ({
+  initialPortfolioAmount,
+  setInitialPortfolioAmount,
+}) => {
   return (
     <div>
       <label>Initial Balance</label>
@@ -9,7 +12,9 @@ const SelectCurrency = ({ initialAmount, setInitialAmount }) => {
         placeholder="Please enter a number"
         defaultValue={1000}
         decimalsLimit={2}
-        onValueChange={(value, name) => setInitialAmount(value)}
+        onValueChange={(value, name) => {
+          setInitialPortfolioAmount(Number(value));
+        }}
       />
     </div>
   );
