@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const DatePicker = () => {
-  const [date, setDate] = useState("");
+const DatePicker = ({ date, setDate }) => {
   const dateInputRef = useRef(null);
 
   const handleChange = (e) => {
