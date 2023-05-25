@@ -1,0 +1,17 @@
+export const stockList = {
+  AAPL: "Apple Inc.",
+  MSFT: "Microsoft Corporation",
+  AMZN: "Amazon.com, Inc.",
+  GOOG: "Alphabet Inc.",
+  FB: "Facebook, Inc.",
+  TSLA: "Tesla, Inc.",
+  BRK: "Berkshire Hathaway Inc.",
+  BABA: "Alibaba Group Holding Limited",
+  V: "Visa Inc.",
+  JNJ: "Johnson & Johnson",
+  JPM: "JPMorgan Chase & Co.",
+  WMT: "Walmart Inc.",
+  MA: "Mastercard Incorporated",
+  PG: "The Procter & Gamble Company",
+  UNH: "UnitedHealth Group Incorporated",
+};

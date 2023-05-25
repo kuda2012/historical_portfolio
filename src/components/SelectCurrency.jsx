@@ -10,7 +10,7 @@ const SelectCurrency = ({
         id="input-example"
         name="input-name"
         placeholder="Please enter a number"
-        defaultValue={1000}
+        defaultValue={5000}
         decimalsLimit={2}
         onValueChange={(value, name) => {
           setInitialPortfolioAmount(Number(value));
