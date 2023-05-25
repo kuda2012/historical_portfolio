@@ -1,15 +1,59 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import StockSelection from "./StockSelection";
+import axios from "axios";
 
 const StockSelectionInputs = ({
   percentages,
   setInitialIndividualStockDollarAmount,
   initialPortfolioAmount,
   setTotalPercentages,
+  date,
+  initialIndividualStockDollarAmount,
   stockSymbols,
   setStockSymbols,
+  setFinalIndividualStockDollarAmount,
 }) => {
+  const [fetchData, setFetchData] = useState(false);
+
+  useEffect(() => {
+    let urls = [];
+    if (fetchData) {
+      Object.keys(stockSymbols).map((stock, num) => {
+        urls.push(
+          `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbols[stock]}&outputsize=compact&apikey=CUZFO32ID30TEUX6`
+        );
+      });
+      Promise.all(
+        urls.map((url) =>
+          axios
+            .get(url)
+            .then((response) => response.data)
+            .catch((error) => console.log(error))
+        )
+      ).then((data) => {
+        data.map((stock, num) => {
+          const dailyData = data[num]["Time Series (Daily)"];
+          // console.log(dailyData);
+          const highValue = dailyData[date]["2. high"];
+          console.log(date, highValue);
+          setFinalIndividualStockDollarAmount((prevData) => {
+            return {
+              ...prevData,
+              [stockSymbols["stock".concat(num)]]: Number(
+                (
+                  (initialIndividualStockDollarAmount["value".concat(num)] /
+                    Number(highValue)) *
+                  dailyData["2023-05-25"]["2. high"]
+                ).toFixed(2)
+              ),
+            };
+          });
+        });
+        setFetchData(false);
+      });
+    }
+  });
   return (
     <>
       <h3>
@@ -24,7 +68,7 @@ const StockSelectionInputs = ({
       <div>
         {Object.keys(stockSymbols).map((stock, num) => {
           return (
-            <div>
+            <div key={num}>
               <StockSelection
                 stockSymbols={stockSymbols}
                 setStockSymbols={setStockSymbols}
@@ -70,6 +114,15 @@ const StockSelectionInputs = ({
             </div>
           );
         })}
+        <button
+          onClick={() => {
+            if (percentages.totalPercent === 100) {
+              setFetchData(true);
+            }
+          }}
+        >
+          Submit
+        </button>
       </div>
     </>
   );

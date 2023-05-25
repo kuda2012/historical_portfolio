@@ -3,7 +3,6 @@ export const stockList = {
   MSFT: "Microsoft Corporation",
   AMZN: "Amazon.com, Inc.",
   GOOG: "Alphabet Inc.",
-  FB: "Facebook, Inc.",
   TSLA: "Tesla, Inc.",
   BRK: "Berkshire Hathaway Inc.",
   BABA: "Alibaba Group Holding Limited",
