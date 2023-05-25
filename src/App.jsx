@@ -10,26 +10,26 @@ function App() {
   const [date, setDate] = useState("");
   const [initialPortfolioAmount, setInitialPortfolioAmount] = useState(5000);
   const [percentages, setTotalPercentages] = useState({
+    value0: 0,
     value1: 0,
     value2: 0,
     value3: 0,
-    value4: 0,
     totalPercent: 0,
   });
   const [
     initialIndividualStockDollarAmount,
     setInitialIndividualStockDollarAmount,
   ] = useState({
+    value0: 0,
     value1: 0,
     value2: 0,
     value3: 0,
-    value4: 0,
   });
   const [stockSymbols, setStockSymbols] = useState({
+    stock0: "AAPL",
     stock1: "AAPL",
     stock2: "AAPL",
     stock3: "AAPL",
-    stock4: "AAPL",
   });
   console.log(stockSymbols, initialIndividualStockDollarAmount, percentages);
   return (
