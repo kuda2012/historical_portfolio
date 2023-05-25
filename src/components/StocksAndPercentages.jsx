@@ -46,13 +46,6 @@ const StockSelectionInputs = ({
                     };
                   });
                   setTotalPercentages((prevPercentages) => {
-                    let totalSum =
-                      values.floatValue +
-                      prevPercentages.value0 +
-                      prevPercentages.value1 +
-                      prevPercentages.value2 +
-                      prevPercentages.value3 -
-                      prevPercentages["value".concat(num)];
                     return {
                       ...prevPercentages,
                       ["value".concat(num)]:
