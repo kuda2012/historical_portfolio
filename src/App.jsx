@@ -31,7 +31,12 @@ function App() {
     stock2: "AAPL",
     stock3: "AAPL",
   });
-  console.log(stockSymbols, initialIndividualStockDollarAmount, percentages);
+  console.log(
+    initialPortfolioAmount,
+    stockSymbols,
+    initialIndividualStockDollarAmount,
+    percentages
+  );
   return (
     <div id="mainDiv">
       <h1>Your portfolio over time</h1>
