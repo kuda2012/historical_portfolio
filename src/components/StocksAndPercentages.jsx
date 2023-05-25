@@ -7,6 +7,8 @@ const StockSelectionInputs = ({
   setInitialIndividualStockDollarAmount,
   initialPortfolioAmount,
   setTotalPercentages,
+  stockSymbols,
+  setStockSymbols,
 }) => {
   return (
     <>
@@ -21,7 +23,11 @@ const StockSelectionInputs = ({
       </h3>
       <div>
         <div>
-          <StockSelection />
+          <StockSelection
+            stockSymbols={stockSymbols}
+            setStockSymbols={setStockSymbols}
+            order={1}
+          />
           <NumericFormat
             isAllowed={(values) => {
               const { formattedValue, floatValue } = values;
@@ -57,7 +63,11 @@ const StockSelectionInputs = ({
           />
         </div>
         <div>
-          <StockSelection />
+          <StockSelection
+            stockSymbols={stockSymbols}
+            setStockSymbols={setStockSymbols}
+            order={2}
+          />
           <NumericFormat
             isAllowed={(values) => {
               const { formattedValue, floatValue } = values;
@@ -93,7 +103,11 @@ const StockSelectionInputs = ({
           />
         </div>
         <div>
-          <StockSelection />
+          <StockSelection
+            stockSymbols={stockSymbols}
+            setStockSymbols={setStockSymbols}
+            order={3}
+          />
           <NumericFormat
             isAllowed={(values) => {
               const { formattedValue, floatValue } = values;
@@ -129,7 +143,11 @@ const StockSelectionInputs = ({
           />
         </div>
         <div>
-          <StockSelection />
+          <StockSelection
+            stockSymbols={stockSymbols}
+            setStockSymbols={setStockSymbols}
+            order={4}
+          />
           <NumericFormat
             isAllowed={(values) => {
               const { formattedValue, floatValue } = values;

@@ -8,7 +8,7 @@ import "./App.css";
 
 function App() {
   const [date, setDate] = useState("");
-  const [initialPortfolioAmount, setInitialPortfolioAmount] = useState();
+  const [initialPortfolioAmount, setInitialPortfolioAmount] = useState(5000);
   const [percentages, setTotalPercentages] = useState({
     value1: 0,
     value2: 0,
@@ -25,6 +25,13 @@ function App() {
     value3: 0,
     value4: 0,
   });
+  const [stockSymbols, setStockSymbols] = useState({
+    stock1: "AAPL",
+    stock2: "AAPL",
+    stock3: "AAPL",
+    stock4: "AAPL",
+  });
+  console.log(stockSymbols, initialIndividualStockDollarAmount, percentages);
   return (
     <div id="mainDiv">
       <h1>Your portfolio over time</h1>
@@ -40,6 +47,8 @@ function App() {
         }
         initialPortfolioAmount={initialPortfolioAmount}
         setTotalPercentages={setTotalPercentages}
+        stockSymbols={stockSymbols}
+        setStockSymbols={setStockSymbols}
       />
       <FetchSymbol date={"2023-05-18"} symbol={"AAPL"} />
     </div>
