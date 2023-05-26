@@ -138,18 +138,21 @@ const StockSelectionInputs = ({
             </div>
           );
         })}
-        <button
-          onClick={() => {
-            if (percentages.totalPercent === 100) {
-              setFinalIndividualStockDollarAmount({});
-              setFetchData(true);
-            } else {
-              alert("Percentages must add up to 100");
-            }
-          }}
-        >
-          Submit
-        </button>
+        {fetchData && <div>(You may need to wait one minute to resubmit)</div>}
+        <>
+          <button
+            onClick={() => {
+              if (percentages.totalPercent === 100) {
+                setFinalIndividualStockDollarAmount({});
+                setFetchData(true);
+              } else {
+                alert("Percentages must add up to 100");
+              }
+            }}
+          >
+            Submit
+          </button>
+        </>
       </div>
     </>
   );

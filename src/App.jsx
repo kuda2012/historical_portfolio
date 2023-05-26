@@ -97,6 +97,16 @@ function App() {
               options={options}
               width={"100%"}
               height={"400px"}
+              format="currency"
+              formatters={[
+                {
+                  type: "NumberFormat",
+                  column: 1,
+                  options: {
+                    prefix: "$",
+                  },
+                },
+              ]}
             />
             <Chart
               chartType="PieChart"
@@ -104,6 +114,15 @@ function App() {
               options={options1}
               width={"100%"}
               height={"400px"}
+              formatters={[
+                {
+                  type: "NumberFormat",
+                  column: 1,
+                  options: {
+                    prefix: "$",
+                  },
+                },
+              ]}
             />
           </>
         )}
