@@ -12,7 +12,7 @@ const SelectCurrency = ({
         placeholder="Please enter a number"
         defaultValue={initialPortfolioAmount}
         decimalsLimit={2}
-        onValueChange={(value, name) => {
+        onValueChange={(value) => {
           setInitialPortfolioAmount(Number(value));
         }}
       />

@@ -17,13 +17,20 @@ const StockSelectionInputs = ({
 }) => {
   const [fetchData, setFetchData] = useState(false);
   useEffect(() => {
+    const arrStockSymbols = Object.values(stockSymbols);
+    const arrPercentages = Object.values(percentages);
+    const stockSymbolsAndPercentages = {};
+    arrStockSymbols.forEach((stock, num) => {
+      stockSymbolsAndPercentages[stock] = !stockSymbolsAndPercentages[stock]
+        ? arrPercentages[num]
+        : stockSymbolsAndPercentages[stock] + arrPercentages[num];
+    });
     let urls = [];
-    const getPercentageValues = Object.entries(percentages);
     if (fetchData) {
-      Object.keys(stockSymbols).map((stock, num) => {
-        if (getPercentageValues[num][1] !== 0) {
+      Object.entries(stockSymbolsAndPercentages).map((stock, num) => {
+        if (stock[1] !== 0) {
           urls.push(
-            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbols[stock]}&outputsize=compact&apikey=CUZFO32ID30TEUX6`
+            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stock[0]}&outputsize=full&apikey=CUZFO32ID30TEUX6`
           );
         }
       });
@@ -119,11 +126,7 @@ const StockSelectionInputs = ({
         })}
         <button
           onClick={() => {
-            function checkForDuplicates(array) {
-              return new Set(array).size !== array.length;
-            }
-            const arr = Object.values(stockSymbols);
-            if (percentages.totalPercent === 100 && !checkForDuplicates(arr)) {
+            if (percentages.totalPercent === 100) {
               setFinalIndividualStockDollarAmount({});
               setFetchData(true);
             } else {
