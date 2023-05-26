@@ -4,7 +4,7 @@ export const stockList = {
   AMZN: "Amazon.com, Inc.",
   GOOG: "Alphabet Inc.",
   TSLA: "Tesla, Inc.",
-  BRK: "Berkshire Hathaway Inc.",
+  "BRK.A": "Berkshire Hathaway Inc.",
   BABA: "Alibaba Group Holding Limited",
   V: "Visa Inc.",
   JNJ: "Johnson & Johnson",
