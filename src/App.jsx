@@ -28,8 +28,8 @@ function App() {
   const [stockSymbols, setStockSymbols] = useState({
     stock0: "AAPL",
     stock1: "MSFT",
-    stock2: "GOOG",
-    stock3: "AMZN",
+    stock2: "V",
+    stock3: "WMT",
   });
   const [
     finalIndividualStockDollarAmount,
