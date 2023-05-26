@@ -52,13 +52,13 @@ function App() {
   const options = {
     title: `Initial Portfolio Allocation - ${moment(date).format(
       "MM-DD-YYYY"
-    )} - $${initialPortfolioAmount}`,
+    )} - Initial Balance: $${initialPortfolioAmount}`,
   };
 
   const options1 = {
     title: `Current Portfolio Allocation - ${moment()
       .subtract(3, "days")
-      .format("MM-DD-YYYY")} - $${Object.values(
+      .format("MM-DD-YYYY")} - Current Balance:  $${Object.values(
       finalIndividualStockDollarAmount
     )
       .reduce((a, b) => a + b, 0)

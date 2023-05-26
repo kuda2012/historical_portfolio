@@ -59,6 +59,7 @@ const StockSelectionInputs = ({
         );
         data.map((stock, num) => {
           const dailyData = data[num]["Time Series (Daily)"];
+          console.log(dailyData);
           const highValue = dailyData[date]["2. high"];
           setFinalIndividualStockDollarAmount((prevData) => {
             return {
