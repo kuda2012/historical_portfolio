@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import StockSelection from "./StockSelection";
 import axios from "axios";
+import moment from "moment";
 
 const StockSelectionInputs = ({
   percentages,
@@ -44,7 +45,9 @@ const StockSelectionInputs = ({
                 (
                   (initialIndividualStockDollarAmount["value".concat(num)] /
                     Number(highValue)) *
-                  dailyData["2023-05-25"]["2. high"]
+                  dailyData[moment().subtract(1, "days").format("YYYY-MM-DD")][
+                    "2. high"
+                  ]
                 ).toFixed(2)
               ),
             };
