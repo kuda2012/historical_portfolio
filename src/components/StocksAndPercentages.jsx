@@ -18,7 +18,6 @@ const StockSelectionInputs = ({
   useEffect(() => {
     let urls = [];
     const getPercentageValues = Object.entries(percentages);
-    // console.log(getPercentageValues[0]);
     if (fetchData) {
       Object.keys(stockSymbols).map((stock, num) => {
         if (getPercentageValues[num][1] !== 0) {
@@ -39,16 +38,6 @@ const StockSelectionInputs = ({
           const dailyData = data[num]["Time Series (Daily)"];
           const highValue = dailyData[date]["2. high"];
           setFinalIndividualStockDollarAmount((prevData) => {
-            console.log({
-              ...prevData,
-              [stockSymbols["stock".concat(num)]]: Number(
-                (
-                  (initialIndividualStockDollarAmount["value".concat(num)] /
-                    Number(highValue)) *
-                  dailyData["2023-05-25"]["2. high"]
-                ).toFixed(2)
-              ),
-            });
             return {
               ...prevData,
               [stockSymbols["stock".concat(num)]]: Number(
@@ -127,10 +116,17 @@ const StockSelectionInputs = ({
         })}
         <button
           onClick={() => {
-            if (percentages.totalPercent === 100) {
+            function checkForDuplicates(array) {
+              return new Set(array).size !== array.length;
+            }
+            const arr = Object.values(stockSymbols);
+            if (percentages.totalPercent === 100 && !checkForDuplicates(arr)) {
+              setFinalIndividualStockDollarAmount({});
               setFetchData(true);
             } else {
-              alert("Percentages must add up to 100");
+              alert(
+                "Percentages must add up to 100 and stock selections must be unique"
+              );
             }
           }}
         >

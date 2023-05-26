@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { stockList } from "../assets/stockList";
 
 const StockSelection = ({ stockSymbols, setStockSymbols, order }) => {

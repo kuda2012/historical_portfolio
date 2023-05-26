@@ -107,8 +107,6 @@ function App() {
           </>
         )}
       </div>
-
-      {/* <FetchSymbol date={"2023-05-18"} symbol={"AAPL"} /> */}
     </div>
   );
 }
