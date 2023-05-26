@@ -66,7 +66,7 @@ const StockSelectionInputs = ({
               [Object.keys(stockSymbolsAndPercentages)[num]]: Number(
                 (
                   (bigObject[num] / Number(highValue)) *
-                  dailyData[moment().subtract(1, "days").format("YYYY-MM-DD")][
+                  dailyData[moment().subtract(3, "days").format("YYYY-MM-DD")][
                     "2. high"
                   ]
                 ).toFixed(2)
