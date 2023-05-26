@@ -7,7 +7,7 @@ import moment from "moment";
 import "./App.css";
 
 function App() {
-  const [date, setDate] = useState("2023-05-18");
+  const [date, setDate] = useState("2023-04-10");
   const [initialPortfolioAmount, setInitialPortfolioAmount] = useState(5000);
   const [percentages, setTotalPercentages] = useState({
     value0: 0,
