@@ -15,14 +15,17 @@ const StockSelectionInputs = ({
   setFinalIndividualStockDollarAmount,
 }) => {
   const [fetchData, setFetchData] = useState(false);
-
   useEffect(() => {
     let urls = [];
+    const getPercentageValues = Object.entries(percentages);
+    // console.log(getPercentageValues[0]);
     if (fetchData) {
       Object.keys(stockSymbols).map((stock, num) => {
-        urls.push(
-          `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbols[stock]}&outputsize=compact&apikey=CUZFO32ID30TEUX6`
-        );
+        if (getPercentageValues[num][1] !== 0) {
+          urls.push(
+            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbols[stock]}&outputsize=compact&apikey=CUZFO32ID30TEUX6`
+          );
+        }
       });
       Promise.all(
         urls.map((url) =>
@@ -34,10 +37,18 @@ const StockSelectionInputs = ({
       ).then((data) => {
         data.map((stock, num) => {
           const dailyData = data[num]["Time Series (Daily)"];
-          // console.log(dailyData);
           const highValue = dailyData[date]["2. high"];
-          console.log(date, highValue);
           setFinalIndividualStockDollarAmount((prevData) => {
+            console.log({
+              ...prevData,
+              [stockSymbols["stock".concat(num)]]: Number(
+                (
+                  (initialIndividualStockDollarAmount["value".concat(num)] /
+                    Number(highValue)) *
+                  dailyData["2023-05-25"]["2. high"]
+                ).toFixed(2)
+              ),
+            });
             return {
               ...prevData,
               [stockSymbols["stock".concat(num)]]: Number(

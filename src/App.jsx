@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import InitialEntries from "./components/IntialEntries";
-import FetchSymbol from "./FetchSymbol.jsx";
 import DatePicker from "./components/DatePicker";
 import SelectCurrency from "./components/SelectCurrency";
 import StockSelectionInputs from "./components/StocksAndPercentages";
@@ -29,14 +27,15 @@ function App() {
   });
   const [stockSymbols, setStockSymbols] = useState({
     stock0: "AAPL",
-    stock1: "AAPL",
-    stock2: "AAPL",
-    stock3: "AAPL",
+    stock1: "MSFT",
+    stock2: "GOOG",
+    stock3: "AMZN",
   });
   const [
     finalIndividualStockDollarAmount,
     setFinalIndividualStockDollarAmount,
   ] = useState({});
+
   const data = [
     ["Stock", "Total Portfolio Amount"],
     [stockSymbols.stock0, initialIndividualStockDollarAmount.value0],
@@ -45,25 +44,10 @@ function App() {
     [stockSymbols.stock3, initialIndividualStockDollarAmount.value3],
   ];
 
-  const data1 = [
-    ["Stock", "Total Portfolio Amount"],
-    [
-      stockSymbols.stock0,
-      finalIndividualStockDollarAmount[stockSymbols.stock0],
-    ],
-    [
-      stockSymbols.stock1,
-      finalIndividualStockDollarAmount[stockSymbols.stock1],
-    ],
-    [
-      stockSymbols.stock2,
-      finalIndividualStockDollarAmount[stockSymbols.stock2],
-    ],
-    [
-      stockSymbols.stock3,
-      finalIndividualStockDollarAmount[stockSymbols.stock3],
-    ],
-  ];
+  let data1 = [["Stock", "Total Portfolio Amount"]];
+  Object.keys(finalIndividualStockDollarAmount).map((stock, num) => {
+    data1.push([stock, finalIndividualStockDollarAmount[stock]]);
+  });
 
   const options = {
     title: `Initial Portfolio Allocation - ${moment(date).format(
@@ -74,25 +58,11 @@ function App() {
   const options1 = {
     title: `Current Portfolio Allocation - ${moment().format(
       "MM-DD-YYYY"
-    )} - $${
-      isNaN(
-        (
-          finalIndividualStockDollarAmount[stockSymbols.stock0] +
-          finalIndividualStockDollarAmount[stockSymbols.stock1] +
-          finalIndividualStockDollarAmount[stockSymbols.stock2] +
-          finalIndividualStockDollarAmount[stockSymbols.stock3]
-        )?.toFixed(2)
-      )
-        ? 0
-        : (
-            finalIndividualStockDollarAmount[stockSymbols.stock0] +
-            finalIndividualStockDollarAmount[stockSymbols.stock1] +
-            finalIndividualStockDollarAmount[stockSymbols.stock2] +
-            finalIndividualStockDollarAmount[stockSymbols.stock3]
-          )?.toFixed(2)
-    }`,
+    )} - $${Object.values(finalIndividualStockDollarAmount).reduce(
+      (a, b) => a + b,
+      0
+    )}`,
   };
-  // console.log(data, data1);
 
   return (
     <div id="mainDiv">
@@ -118,20 +88,24 @@ function App() {
         setStockSymbols={setStockSymbols}
       />
       <div>
-        <Chart
-          chartType="PieChart"
-          data={data}
-          options={options}
-          width={"100%"}
-          height={"400px"}
-        />
-        <Chart
-          chartType="PieChart"
-          data={data1}
-          options={options1}
-          width={"100%"}
-          height={"400px"}
-        />
+        {Object.keys(finalIndividualStockDollarAmount).length > 0 && (
+          <>
+            <Chart
+              chartType="PieChart"
+              data={data}
+              options={options}
+              width={"100%"}
+              height={"400px"}
+            />
+            <Chart
+              chartType="PieChart"
+              data={data1}
+              options={options1}
+              width={"100%"}
+              height={"400px"}
+            />
+          </>
+        )}
       </div>
 
       {/* <FetchSymbol date={"2023-05-18"} symbol={"AAPL"} /> */}
