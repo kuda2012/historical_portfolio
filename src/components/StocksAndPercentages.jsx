@@ -118,6 +118,8 @@ const StockSelectionInputs = ({
           onClick={() => {
             if (percentages.totalPercent === 100) {
               setFetchData(true);
+            } else {
+              alert("Percentages must add up to 100");
             }
           }}
         >

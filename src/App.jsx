@@ -5,10 +5,11 @@ import DatePicker from "./components/DatePicker";
 import SelectCurrency from "./components/SelectCurrency";
 import StockSelectionInputs from "./components/StocksAndPercentages";
 import { Chart } from "react-google-charts";
+import moment from "moment";
 import "./App.css";
 
 function App() {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("2023-05-18");
   const [initialPortfolioAmount, setInitialPortfolioAmount] = useState(5000);
   const [percentages, setTotalPercentages] = useState({
     value0: 0,
@@ -65,16 +66,31 @@ function App() {
   ];
 
   const options = {
-    title: `Past portfolio performance - ${date} - $${initialPortfolioAmount}`,
+    title: `Initial Portfolio Allocation - ${moment(date).format(
+      "MM-DD-YYYY"
+    )} - $${initialPortfolioAmount}`,
   };
 
   const options1 = {
-    title: `Current portfolio performance - 05-25-2023 - $${(
-      finalIndividualStockDollarAmount[stockSymbols.stock0] +
-      finalIndividualStockDollarAmount[stockSymbols.stock1] +
-      finalIndividualStockDollarAmount[stockSymbols.stock2] +
-      finalIndividualStockDollarAmount[stockSymbols.stock3]
-    ).toFixed(2)}`,
+    title: `Current Portfolio Allocation - ${moment().format(
+      "MM-DD-YYYY"
+    )} - $${
+      isNaN(
+        (
+          finalIndividualStockDollarAmount[stockSymbols.stock0] +
+          finalIndividualStockDollarAmount[stockSymbols.stock1] +
+          finalIndividualStockDollarAmount[stockSymbols.stock2] +
+          finalIndividualStockDollarAmount[stockSymbols.stock3]
+        )?.toFixed(2)
+      )
+        ? 0
+        : (
+            finalIndividualStockDollarAmount[stockSymbols.stock0] +
+            finalIndividualStockDollarAmount[stockSymbols.stock1] +
+            finalIndividualStockDollarAmount[stockSymbols.stock2] +
+            finalIndividualStockDollarAmount[stockSymbols.stock3]
+          )?.toFixed(2)
+    }`,
   };
   // console.log(data, data1);
 
