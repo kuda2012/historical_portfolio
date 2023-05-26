@@ -144,9 +144,7 @@ const StockSelectionInputs = ({
               setFinalIndividualStockDollarAmount({});
               setFetchData(true);
             } else {
-              alert(
-                "Percentages must add up to 100 and stock selections must be unique"
-              );
+              alert("Percentages must add up to 100");
             }
           }}
         >
