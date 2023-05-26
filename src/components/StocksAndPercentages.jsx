@@ -42,16 +42,30 @@ const StockSelectionInputs = ({
             .catch((error) => console.log(error))
         )
       ).then((data) => {
+        const arrStockSymbols = Object.values(stockSymbols);
+        const arrInitialIndividualStockDollarAmount = Object.values(
+          initialIndividualStockDollarAmount
+        );
+        const stockSymbolsAndInitialIndividualStockDollarAmount = {};
+        arrStockSymbols.forEach((stock, num) => {
+          stockSymbolsAndInitialIndividualStockDollarAmount[stock] =
+            !stockSymbolsAndInitialIndividualStockDollarAmount[stock]
+              ? arrInitialIndividualStockDollarAmount[num]
+              : stockSymbolsAndInitialIndividualStockDollarAmount[stock] +
+                arrInitialIndividualStockDollarAmount[num];
+        });
+        const bigObject = Object.values(
+          stockSymbolsAndInitialIndividualStockDollarAmount
+        );
         data.map((stock, num) => {
           const dailyData = data[num]["Time Series (Daily)"];
           const highValue = dailyData[date]["2. high"];
           setFinalIndividualStockDollarAmount((prevData) => {
             return {
               ...prevData,
-              [stockSymbols["stock".concat(num)]]: Number(
+              [Object.keys(stockSymbolsAndPercentages)[num]]: Number(
                 (
-                  (initialIndividualStockDollarAmount["value".concat(num)] /
-                    Number(highValue)) *
+                  (bigObject[num] / Number(highValue)) *
                   dailyData[moment().subtract(1, "days").format("YYYY-MM-DD")][
                     "2. high"
                   ]

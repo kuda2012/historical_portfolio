@@ -60,7 +60,9 @@ function App() {
       .subtract(1, "days")
       .format("MM-DD-YYYY")} - $${Object.values(
       finalIndividualStockDollarAmount
-    ).reduce((a, b) => a + b, 0)}`,
+    )
+      .reduce((a, b) => a + b, 0)
+      .toFixed(2)}`,
   };
 
   return (
