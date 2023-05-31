@@ -59,7 +59,6 @@ const StockSelectionInputs = ({
         );
         data.map((stock, num) => {
           const dailyData = data[num]["Time Series (Daily)"];
-          console.log(dailyData);
           const highValue = dailyData[date]["2. high"];
           setFinalIndividualStockDollarAmount((prevData) => {
             return {
@@ -67,7 +66,7 @@ const StockSelectionInputs = ({
               [Object.keys(stockSymbolsAndPercentages)[num]]: Number(
                 (
                   (bigObject[num] / Number(highValue)) *
-                  dailyData[moment().subtract(0, "days").format("YYYY-MM-DD")][
+                  dailyData[moment().subtract(1, "days").format("YYYY-MM-DD")][
                     "2. high"
                   ]
                 ).toFixed(2)
