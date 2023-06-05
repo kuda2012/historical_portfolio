@@ -3,6 +3,7 @@ import { NumericFormat } from "react-number-format";
 import StockSelection from "./StockSelection";
 import axios from "axios";
 import moment from "moment";
+import { determineStockDate } from "../helpers/determineStockDate";
 
 const StockSelectionInputs = ({
   percentages,
@@ -57,6 +58,10 @@ const StockSelectionInputs = ({
         const bigObject = Object.values(
           stockSymbolsAndInitialIndividualStockDollarAmount
         );
+        const subtractToDetermineWeekday = determineStockDate(
+          moment().weekday()
+        );
+
         data.map((stock, num) => {
           const dailyData = data[num]["Time Series (Daily)"];
           const highValue = dailyData[date]["2. high"];
@@ -66,9 +71,11 @@ const StockSelectionInputs = ({
               [Object.keys(stockSymbolsAndPercentages)[num]]: Number(
                 (
                   (bigObject[num] / Number(highValue)) *
-                  dailyData[moment().subtract(1, "days").format("YYYY-MM-DD")][
-                    "2. high"
-                  ]
+                  dailyData[
+                    moment()
+                      .subtract(subtractToDetermineWeekday, "days")
+                      .format("YYYY-MM-DD")
+                  ]["2. high"]
                 ).toFixed(2)
               ),
             };

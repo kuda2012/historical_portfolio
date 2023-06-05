@@ -5,6 +5,7 @@ import StockSelectionInputs from "./components/StocksAndPercentages";
 import { Chart } from "react-google-charts";
 import moment from "moment";
 import "./App.css";
+import { determineStockDate } from "./helpers/determineStockDate";
 
 function App() {
   const [date, setDate] = useState("2023-04-10");
@@ -54,10 +55,10 @@ function App() {
       "MM-DD-YYYY"
     )} - Initial Balance: $${initialPortfolioAmount}`,
   };
-
+  const subtractToDetermineWeekday = determineStockDate(moment().weekday());
   const options1 = {
     title: `Current Portfolio Allocation - ${moment()
-      .subtract(1, "days")
+      .subtract(subtractToDetermineWeekday, "days")
       .format("MM-DD-YYYY")} - Current Balance:  $${Object.values(
       finalIndividualStockDollarAmount
     )
